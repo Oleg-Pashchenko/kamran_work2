@@ -1,11 +1,12 @@
 import requests
 from PIL import Image
-
+import pandas as pd
+import openpyxl  # noqa: F401
 
 def download_image(link: str, index):
-    filename = f'dependencies/{index}.jpg'
+    filename = f"dependencies/{index}.jpg"
     img_data = requests.get(link).content
-    with open(filename, 'wb') as handler:
+    with open(filename, "wb") as handler:
         handler.write(img_data)
     handler.close()
 
@@ -16,7 +17,7 @@ def download_image(link: str, index):
 
 
 def read_file(filename: str):
-    import pandas as pd
+
     df = pd.read_excel(filename)
     result = []
     for _, row in df.iterrows():
@@ -28,5 +29,3 @@ def read_file(filename: str):
         image = f"https://unas.ru/scripts/images.php?product={article}"
         result.append([article, name, image])
     return result
-
-
