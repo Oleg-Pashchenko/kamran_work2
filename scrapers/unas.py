@@ -19,6 +19,8 @@ def load_data():
     cards = soup.find_all("div", {"class": "item_block lg col-lg-20 col-md-4 col-xs-6"})
     idx = 0
     for card in cards:
+        if card.find('img').get('alt') == 'Семена и посадочный материал':
+            continue
         idx += 1
         print(f"Loaded data {idx}/{len(cards)}")
         download_link = "https://unas.ru/" + card.find("a").get("href")
